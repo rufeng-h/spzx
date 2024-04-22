@@ -1,0 +1,12 @@
+server:
+  port: 8501
+
+spring:
+  cache:
+    redis:
+      key-prefix: mall_
+      use-key-prefix: true
+
+  jackson:
+    # 仅对Date对象生效
+    date-format: yyyy-MM-dd HH:mm:ss

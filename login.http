@@ -1,0 +1,8 @@
+### Send POST request with json body
+POST http://localhost:8000/login?s=s&username=sdf&password=adsf&value=1
+Content-Type: application/json
+
+{
+  "username": "999",
+  "password": "content"
+}
