@@ -1,5 +1,9 @@
 package com.windcf.sprintbootdemo.common;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
@@ -15,14 +19,22 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-//    /**
-//     * 未知异常
-//     */
-//    @ExceptionHandler(Exception.class)
-//    public ApiResponse<Void> unknownError(Exception e) {
-//        e.printStackTrace();
-//        return ApiResponse.unknownError();
-//    }
+    private static final Log logger = LogFactory.getLog(GlobalExceptionHandler.class);
+
+    /**
+     * 未知异常
+     */
+    @ExceptionHandler(Exception.class)
+    public ApiResponse<Void> unknownError(Exception e) {
+        logger.error("unknown error", e);
+        return ApiResponse.unknownError();
+    }
+
+    @ExceptionHandler(AppException.class)
+    public ApiResponse<Void> appException(AppException e) {
+        logger.error("app error", e);
+        return ApiResponse.userError();
+    }
 //
 //    /**
 //     * TODO 如何处理异常消息
